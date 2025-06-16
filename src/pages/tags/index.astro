@@ -1,0 +1,59 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import TagList from '../../components/TagList.astro';
+import { mockTags } from '../../data/mockData';
+---
+
+<Layout title="タグ一覧 | Community Hub" description="コミュニティサイトで使用されているタグの一覧です。">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- パンくずナビ -->
+    <nav class="mb-8 text-sm">
+      <ol class="flex items-center space-x-2 text-gray-500">
+        <li>
+          <a href="/" class="hover:text-blue-600">ホーム</a>
+        </li>
+        <li>
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+            <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+          </svg>
+        </li>
+        <li class="text-gray-900 font-medium">
+          タグ一覧
+        </li>
+      </ol>
+    </nav>
+
+    <!-- ページヘッダー -->
+    <header class="text-center mb-12">
+      <h1 class="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+        タグ一覧
+      </h1>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        コミュニティサイトで使用されているタグの一覧です。<br>
+        興味のあるタグをクリックして関連する投稿を探してみましょう。
+      </p>
+    </header>
+
+    <!-- タグリスト -->
+    <TagList tags={mockTags} title="すべてのタグ" />
+    
+    <!-- 統計情報 -->
+    <div class="mt-12 bg-white rounded-lg shadow-sm p-6">
+      <h2 class="text-xl font-semibold text-gray-900 mb-4">タグ統計</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div class="text-center p-4 bg-blue-50 rounded-lg">
+          <div class="text-2xl font-bold text-blue-600">{mockTags.length}</div>
+          <div class="text-sm text-gray-600">総タグ数</div>
+        </div>
+        <div class="text-center p-4 bg-green-50 rounded-lg">
+          <div class="text-2xl font-bold text-green-600">8</div>
+          <div class="text-sm text-gray-600">アクティブタグ</div>
+        </div>
+        <div class="text-center p-4 bg-purple-50 rounded-lg">
+          <div class="text-2xl font-bold text-purple-600">Web開発</div>
+          <div class="text-sm text-gray-600">人気タグ</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
