@@ -1,0 +1,78 @@
+---
+import type { Post } from '../types';
+
+export interface Props {
+  post: Post;
+}
+
+const { post } = Astro.props;
+const formattedDate = new Date(post.publishedAt).toLocaleDateString('ja-JP');
+---
+
+<article class="bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow duration-200 overflow-hidden">
+  <div class="aspect-video bg-gray-200 overflow-hidden">
+    {post.thumbnail ? (
+      <img 
+        src={post.thumbnail} 
+        alt={post.title}
+        class="w-full h-full object-cover hover:scale-105 transition-transform duration-200"
+      />
+    ) : (
+      <div class="w-full h-full bg-gradient-to-br from-blue-100 to-blue-200 flex items-center justify-center">
+        <svg class="w-12 h-12 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+        </svg>
+      </div>
+    )}
+  </div>
+  
+  <div class="p-6">
+    <div class="flex flex-wrap gap-2 mb-3">
+      {post.tags.map(tag => (
+        <a 
+          href={`/tags/${tag.id}`}
+          class="inline-block px-2 py-1 text-xs rounded-full text-white hover:opacity-80 transition-opacity"
+          style={`background-color: ${tag.color || '#6B7280'}`}
+        >
+          {tag.name}
+        </a>
+      ))}
+    </div>
+    
+    <h3 class="text-lg font-semibold text-gray-900 mb-2 line-clamp-2">
+      <a href={`/posts/${post.id}`} class="hover:text-blue-600 transition-colors">
+        {post.title}
+      </a>
+    </h3>
+    
+    <p class="text-gray-600 text-sm mb-4 line-clamp-3">
+      {post.summary}
+    </p>
+    
+    <div class="flex items-center justify-between text-sm text-gray-500">
+      <div class="flex items-center">
+        <span class="mr-2">by</span>
+        <span class="font-medium">{post.author}</span>
+      </div>
+      <time datetime={post.publishedAt}>
+        {formattedDate}
+      </time>
+    </div>
+  </div>
+</article>
+
+<style>
+  .line-clamp-2 {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>
