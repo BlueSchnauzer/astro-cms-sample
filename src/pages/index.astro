@@ -2,9 +2,11 @@
 import Layout from '../layouts/Layout.astro';
 import PostCard from '../components/PostCard.astro';
 import TagList from '../components/TagList.astro';
-import { getFeaturedPosts, mockSites, mockTags } from '../data/mockData';
+import { getFeaturedPosts, fetchSites } from '../data/apiData';
+import { mockTags } from '../data/mockData';
 
-const featuredPosts = getFeaturedPosts(6);
+const featuredPosts = await getFeaturedPosts(6);
+const sites = await fetchSites();
 ---
 
 <Layout title="Community Hub - コミュニティ横断投稿サイト">
@@ -53,7 +55,7 @@ const featuredPosts = getFeaturedPosts(6);
           </div>
           
           <div class="space-y-4">
-            {mockSites.slice(0, 3).map(site => (
+            {sites.slice(0, 3).map(site => (
               <div class="flex items-center space-x-3 p-3 rounded-lg hover:bg-gray-50 transition-colors">
                 <div class="w-12 h-12 bg-gradient-to-br from-blue-100 to-blue-200 rounded-lg flex items-center justify-center flex-shrink-0">
                   <svg class="w-6 h-6 text-blue-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
