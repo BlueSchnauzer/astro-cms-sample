@@ -1,26 +1,35 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 import PostCard from '../../components/PostCard.astro';
-import { getPostById, getSiteById, mockPosts } from '../../data/mockData';
+import { fetchPosts, fetchSites } from '../../data/apiData';
 
 export async function getStaticPaths() {
-  return mockPosts.map(post => ({
-    params: { id: post.id },
-    props: { post }
-  }));
+  const posts = await fetchPosts();
+  const sites = await fetchSites();
+  
+  return posts.map(post => {
+    const site = sites.find(s => s.id === post.siteId);
+    const relatedPosts = posts
+      .filter(p => p.id !== post.id && p.siteId === post.siteId)
+      .slice(0, 3);
+    
+    return {
+      params: { id: post.id },
+      props: { 
+        post,
+        site,
+        relatedPosts
+      }
+    };
+  });
 }
 
 const { id } = Astro.params;
-const { post } = Astro.props;
+const { post, site, relatedPosts } = Astro.props;
 
 if (!post) {
   return Astro.redirect('/404');
 }
-
-const site = getSiteById(post.siteId);
-const relatedPosts = mockPosts
-  .filter(p => p.id !== post.id && p.siteId === post.siteId)
-  .slice(0, 3);
 
 const formattedDate = new Date(post.publishedAt).toLocaleDateString('ja-JP', {
   year: 'numeric',
