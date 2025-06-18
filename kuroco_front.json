@@ -1,0 +1,15 @@
+{
+  "rewrites": [
+    {
+      "source": ".*",
+      "destination": "/index.html"
+    }
+  ],
+  "redirects": [],
+  "redirects_by_ie": [],
+  "basic": [],
+  "ip_restrictions": [],
+  "ip_restricted_maintenance": [],
+  "stale_while_revalidate": "3000",
+  "error_page": {}
+}
