@@ -50,7 +50,7 @@ jobs:
             - name: Copy KurocoFront config
               run: cp kuroco_front.json dist/
             - name: Zip artifact for upload
-              run: zip -r out.zip dist
+              run: cd dist && zip ../out.zip . -r
             - name: Archive Production Artifact
               uses: actions/upload-artifact@v4
               with:
@@ -95,7 +95,7 @@ jobs:
             - name: Copy KurocoFront config
               run: cp kuroco_front.json dist/
             - name: Zip artifact for upload
-              run: zip -r out.zip dist
+              run: cd dist && zip ../out.zip . -r
             - name: Archive Production Artifact
               uses: actions/upload-artifact@v4
               with:
