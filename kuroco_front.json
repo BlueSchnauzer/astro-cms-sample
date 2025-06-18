@@ -1,5 +1,10 @@
 {
-  "rewrites": [],
+  "rewrites": [
+    {
+      "source": "^/([^/]+)/?$",
+      "destination": "/$1/index.html"
+    }
+  ],
   "redirects": [],
   "redirects_by_ie": [],
   "basic": [],
