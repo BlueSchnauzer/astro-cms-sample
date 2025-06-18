@@ -55,7 +55,7 @@ jobs:
               uses: actions/upload-artifact@v4
               with:
                   name: ${{ steps.get_branch.outputs.sha }}-${{ github.run_id }}
-                  path: out.zip
+                  path: dist
                   retention-days: 7
             - name: Wait for Artifact download
               run: sleep 15
@@ -64,7 +64,7 @@ jobs:
               env:
                   webhook_url: "https://community-hub-proto.g.kuroco.app/direct/menu/github/"
                   webhook_secret: "33f2d6c995929ce0ea9e8da9d08271f6"
-                  data: '{"single_zip":"1","domain":"community-hub-proto.g.kuroco-front.app","pr":"${{ github.event.issue.pull_request.url }}",  "repository":"${{ github.repository }}", "run_id":"${{ github.run_id }}", "hash":"${{ steps.get_branch.outputs.sha }}"}'
+                  data: '{"single_zip":"0","domain":"community-hub-proto.g.kuroco-front.app","pr":"${{ github.event.issue.pull_request.url }}",  "repository":"${{ github.repository }}", "run_id":"${{ github.run_id }}", "hash":"${{ steps.get_branch.outputs.sha }}"}'
 
     #for Push
     pushed_build:
@@ -100,11 +100,11 @@ jobs:
               uses: actions/upload-artifact@v4
               with:
                   name: ${{ github.sha }}-${{ github.run_id }}
-                  path: out.zip
+                  path: dist
                   retention-days: 7
             - name: Webhook
               uses: diverta/workflow-webhook@v3
               env:
                   webhook_url: "https://community-hub-proto.g.kuroco.app/direct/menu/github/"
                   webhook_secret: "33f2d6c995929ce0ea9e8da9d08271f6"
-                  data: '{"single_zip":"1","domain":"community-hub-proto.g.kuroco-front.app","pr":"${{ github.event.issue.pull_request.url }}",  "repository":"${{ github.repository }}", "run_id":"${{ github.run_id }}", "hash":"${{ github.sha }}"}'
+                  data: '{"single_zip":"0","domain":"community-hub-proto.g.kuroco-front.app","pr":"${{ github.event.issue.pull_request.url }}",  "repository":"${{ github.repository }}", "run_id":"${{ github.run_id }}", "hash":"${{ github.sha }}"}'
