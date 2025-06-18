@@ -47,6 +47,8 @@ jobs:
               run: npm ci
             - name: Build
               run: npm run build
+            - name: Copy KurocoFront config
+              run: cp kuroco_front.json dist/
             - name: Zip artifact for upload
               run: cd dist && zip ../out.zip . -r
             - name: Archive Production Artifact
@@ -90,6 +92,8 @@ jobs:
               run: npm ci
             - name: Build
               run: npm run build
+            - name: Copy KurocoFront config
+              run: cp kuroco_front.json dist/
             - name: Zip artifact for upload
               run: cd dist && zip ../out.zip . -r
             - name: Archive Production Artifact
